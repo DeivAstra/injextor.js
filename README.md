@@ -1,5 +1,5 @@
 # injextor.js (jQuery plugin)
-Injecting jQuery elements to context  by element attrubutes.
+Inject jQuery elements to context  by element attrubutes.
 
 ### IDEA
 We have some container with some included elements:
@@ -52,5 +52,19 @@ But keep it simple:
 ```js
 $('#container').injext(context, ['name', 'id', 'whatever']);
 ```
+##### Logging
+When element added to context object then log:
+```
+1: foo injected
+2: bar injected
+...
+```
+##### Enable alert dialog when error occurred
+
+```js
+var showAlertOnError = true;
+$('#container').injext(context, 'name', showAlertOnError);
+```
+
 Good luck.
 ### END PROGRAM
