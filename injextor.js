@@ -20,12 +20,12 @@
 			if (!Array.isArray(attrs) && typeof attrs != 'string')
 				throw 'Expected attr names array or attr name';
 
-			if (!Array.isArray(attrs)) {
+			if (Array.isArray(attrs)) {
 				attrs.forEach(function (attr, i) {
-					injextOne(this, context, attr);
+					injectOne(this, context, attr);
 				});
 			} else {
-				injextOne(this, context, attr);
+				injectOne(this, context, attrs);
 			}
 		} catch (e) {
 			console.error(e);
@@ -35,7 +35,7 @@
 		return this;
 	}
 
-	function injextOne(root, context, attr) {
+	function injectOne(root, context, attr) {
 
 		var $root;
 		if (root instanceof jQuery)
@@ -43,16 +43,18 @@
 		else if (typeof root === 'string')
 			$root = $(root);
 		else
-			throw 'Unexpected rootOrSelector type value'
+			throw 'Unexpected root type. Allowed jQuery object or selector string only';
 
 		if (!$root.hasAttr(attr)) {
 			$root.attr(attr, 'root');
 		}
 
 		function check(name) {
+			if (!name || name.trim() === '')
+				throw 'Attribute defined but empty';
 			if (context.hasOwnProperty(name)) {
-				throw 'InjeXt error. Element with attribute "'
-						+ attr + ' = ' + context[attr] + '" already registered';
+				throw 'Element with attribute "' + attr + ' = '
+						+ name + '" already injected';
 			}
 		}
 
