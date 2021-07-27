@@ -59,7 +59,7 @@ When element added to context object then log:
 2: bar injected
 ...
 ```
-##### Show alert dialog when error occurred
+##### Show alert dialog while error occurred
 
 ```js
 var showAlertOnError = true;
