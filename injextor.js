@@ -4,7 +4,7 @@
  * @author: Denis Ivanchik
  * @homepage: https://github.com/danykey/injextor.js
  * @license: BSD-2-Clause
- * @version: 0.1 
+ * @version: 0.1
  */
 
 (function( $ ) {
