@@ -7,10 +7,10 @@
  * @version: 0.1
  */
 
-(function( $ ) {
+(function ($) {
 
-    $.fn.injext = function ( context, attrs, alertOnError ) {
-       try {
+	$.fn.injext = function (context, attrs, alertOnError) {
+		try {
 			if (!context)
 				throw 'Context is not defined';
 
@@ -21,7 +21,7 @@
 				throw 'Expected attr names array or attr name';
 
 			if (!Array.isArray(attrs)) {
-				attrs.forEach(function(attr, i){
+				attrs.forEach(function (attr, i) {
 					injextOne(this, context, attr);
 				});
 			} else {
@@ -29,12 +29,13 @@
 			}
 		} catch (e) {
 			console.error(e);
-			if (alertOnError) alert(e);
+			if (alertOnError)
+				alert(e);
 		}
 		return this;
 	}
 
-	function injextOne (root, context, attr) {
+	function injextOne(root, context, attr) {
 
 		var $root;
 		if (root instanceof jQuery)
@@ -51,11 +52,11 @@
 		function check(name) {
 			if (context.hasOwnProperty(name)) {
 				throw 'InjeXt error. Element with attribute "'
-					+ attr + ' = ' + context[attr] + '" already registered';
+						+ attr + ' = ' + context[attr] + '" already registered';
 			}
 		}
 
-		$root.find('*['+ attr + ']').add($root).each(function(idx, el){
+		$root.find('*[' + attr + ']').add($root).each(function (idx, el) {
 			var $el = $(el);
 			var name = $el.attr(attr);
 			check(name);
@@ -64,4 +65,4 @@
 		});
 	}
 
-}( jQuery ));
+}(jQuery));
