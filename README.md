@@ -52,6 +52,16 @@ But keep it simple:
 ```js
 $('#container').injext(context, ['name', 'id', 'whatever']);
 ```
+##### Applying values
+`applyValues` just calls `val()` jQuery function on each element recursively if property name is the same.
+```js
+var context = {};
+$('#container').injext(context, 'name');
+context.applyValues({
+	foo: 'Bye!'
+});
+```
+
 ##### Logging
 When element added to context object then log:
 ```
