@@ -27,6 +27,27 @@
 			} else {
 				injectOne(this, context, attrs);
 			}
+
+			context.applyValues = (function (values) {
+				var context = this;
+				try {
+					for(prop in values) {
+						
+						if (!context.hasOwnProperty(prop))
+							throw 'Property not found in context:' + prop;
+
+						if (context[prop] instanceof jQuery)
+							context[prop].val(values[prop]);
+						else if (typeof context[prop] != 'function')
+							console.warn('injextor: Object in context in property = '+ prop +' is not jQuery object');
+					}
+				} catch (e) {
+					console.error(e);
+					if (alertOnError)
+						alert(e);
+				}
+			}).bind(context);
+
 		} catch (e) {
 			console.error(e);
 			if (alertOnError)
