@@ -60,8 +60,7 @@ context.applyValues({
 ##### Logging
 When element added to context object then log:
 ```
-1: foo injected
-2: bar injected
+injext: foo, bar, sun
 ...
 ```
 ##### Show alert dialog while error occurred
