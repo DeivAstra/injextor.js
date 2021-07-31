@@ -1,5 +1,5 @@
 # injextor.js (jQuery plugin)
-Inject jQuery elements to context  by element attrubutes.
+Inject jQuery elements to context by attrubutes names.
 
 ### IDEA
 We have some container with some included elements:
