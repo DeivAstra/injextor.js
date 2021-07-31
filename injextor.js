@@ -32,13 +32,14 @@
 			console.log('injext: ' + names.join(', '));
 		} catch (e) {
 			console.error(e);
+			console.error(this);
 			if (alertOnError)
 				alert(e);
 		}
 		return this;
 	};
 
-	function injectOne(section, context, attr) {
+	function injectOne(section, context, attrName) {
 
 		var $section;
 		if (section instanceof jQuery)
@@ -48,20 +49,27 @@
 		else
 			throw 'Unexpected root type. Allowed jQuery object or selector string only';
 
-		function check(attrValue) {
-			if (!attrValue || attrValue.trim() === '')
-				throw 'Attribute defined but value is empty';
-			if (context.hasOwnProperty(attrValue)) {
-				throw 'Attribute "' + attr + ' = '
-						+ attrValue + '" already injected';
+		function getAttrValue($el, attrName) {
+			const attrValue = $el.attr(attrName)
+			try {
+				if (!attrValue || attrValue.trim() === '')
+					throw 'Attribute "'+ attrName +'" defined but value is empty';
+
+				if (context.hasOwnProperty(attrValue)) {
+					throw 'Attribute "' + attrName + ' = '
+							+ attrValue + '" already injected';
+				}
+				return attrValue;
+			} catch (e) {
+				console.error($el);
+				throw e;
 			}
 		}
 
 		const names = [];
-		$section.find('*[' + attr + ']').each(function (idx, el) {
+		$section.find('*[' + attrName + ']').each(function (idx, el) {
 			const $el = $(el);
-			const attrValue = $el.attr(attr);
-			check(attrValue);
+			const attrValue = getAttrValue($el, attrName);
 			context[attrValue] = $el;
 			names.push(attrValue);
 		});
@@ -73,12 +81,12 @@
 		for(prop in values) {
 
 			if (!context.hasOwnProperty(prop))
-				throw 'Property not exists in context:' + prop;
+				throw 'Property is not exists in context: ' + prop;
 
 			if (context[prop] instanceof jQuery)
 				context[prop].val(values[prop]);
 			else if (typeof context[prop] != 'function')
-				console.warn('Object in context in property = '+ prop +' is not jQuery object');
+				console.warn('Property "'+ prop +'" in context is not jQuery object');
 		}
 	}
 
