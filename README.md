@@ -58,7 +58,7 @@ context.applyValues({
 ```
 
 ##### Logging
-After adding elements to context object calls console.log():
+After adding elements to context object calls `console.log()`:
 ```
 injext: foo, bar, sun
 ```
