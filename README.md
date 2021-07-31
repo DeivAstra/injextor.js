@@ -25,14 +25,11 @@ $('#container').injext(context, 'name');
 After that, `context` object contains variables referenced to all elements with `name` attribute:
 ```
 {
-	root: jQuery element of <div id="container"> ,
 	foo: jQuery element of <input name='"foo"/>,
 	bar: jQuery element of <select name='"bar"/>,
 	sun: jQuery element of <span name="sun"/>
 }
 ```
-##### root: ? What??? (:-0)
-Ooops, sorry.. `Container` element will always injected too. If target attribute not defined, then will added as `root` property to context by default. You can override it by adding, for example, `name="section` to get eponymous property in context.
 
 Good, now we can get access to all necessary injected elements:
 ```js
