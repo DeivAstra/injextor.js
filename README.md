@@ -33,8 +33,6 @@ After that, `context` object contains variables referenced to all elements with 
 
 Good, now we can get access to all necessary injected elements:
 ```js
-var context = {};
-$('#container').injext(context, 'name');
 context.foo.val('Hello');
 context.bar.hide();
 context.sun.addClass('star');
