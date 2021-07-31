@@ -63,7 +63,7 @@ After adding elements to context object then calls `console.log()`:
 injext: foo, bar, sun
 ```
 ##### Show alert dialog while error occurred
-
+Default is false.
 ```js
 var showAlertOnError = true;
 $('#container').injext(context, 'name', showAlertOnError);
