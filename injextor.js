@@ -83,9 +83,14 @@
 			if (!context.hasOwnProperty(prop))
 				throw 'Property is not exists in context: ' + prop;
 
-			if (context[prop] instanceof jQuery)
-				context[prop].val(values[prop]);
-			else if (typeof context[prop] != 'function')
+			const $obj = context[prop];
+			const value = values[prop];
+			if ($obj instanceof jQuery) {
+				if ($obj.attr('type') == 'checkbox')
+					$obj.prop('checked', String(value) === 'true')
+				else
+					$obj.val(value);
+			} else if (typeof $obj != 'function')
 				console.warn('Property "'+ prop +'" in context is not jQuery object');
 		}
 	}
